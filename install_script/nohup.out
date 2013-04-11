@@ -1,0 +1,194 @@
+
+(gedit:3244): Gtk-CRITICAL **: gtk_list_store_set_column_types: assertion `priv->columns_dirty == 0' failed
+
+(gedit:2599): Gtk-CRITICAL **: gtk_list_store_set_column_types: assertion `priv->columns_dirty == 0' failed
+
+(gedit:2599): Gtk-CRITICAL **: gtk_window_set_default: assertion `gtk_widget_get_can_default (default_widget)' failed
+
+(gedit:2599): Gtk-CRITICAL **: gtk_widget_event: assertion `WIDGET_REALIZED_FOR_EVENT (widget, event)' failed
+
+(gedit:2599): Gtk-CRITICAL **: gtk_widget_event: assertion `WIDGET_REALIZED_FOR_EVENT (widget, event)' failed
+
+(gedit:2599): Gdk-CRITICAL **: gdk_window_invalidate_rect_full: assertion `GDK_IS_WINDOW (window)' failed
+
+(gedit:2599): Gdk-CRITICAL **: gdk_window_invalidate_rect_full: assertion `GDK_IS_WINDOW (window)' failed
+
+(gedit:2599): Gtk-CRITICAL **: gtk_list_store_set_column_types: assertion `priv->columns_dirty == 0' failed
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (quantum_auth_strategy), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (quantum_admin_username), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (v2), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (quantum_admin_auth_url), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (LinuxOVSInterfaceDriver), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (linux_net), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (linuxnet_interface_driver), this should not happen!
+
+(gedit:2599): Gtk-CRITICAL **: gtk_window_set_default: assertion `gtk_widget_get_can_default (default_widget)' failed
+
+(gedit:2599): Gtk-CRITICAL **: gtk_widget_event: assertion `WIDGET_REALIZED_FOR_EVENT (widget, event)' failed
+
+(gedit:2599): Gtk-CRITICAL **: gtk_widget_event: assertion `WIDGET_REALIZED_FOR_EVENT (widget, event)' failed
+
+(gedit:2599): Gdk-CRITICAL **: gdk_window_invalidate_rect_full: assertion `GDK_IS_WINDOW (window)' failed
+
+(gedit:2599): Gdk-CRITICAL **: gdk_window_invalidate_rect_full: assertion `GDK_IS_WINDOW (window)' failed
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (put_id_of_member_role), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (role), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (put_id_of_user_one), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (role), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (appropriate), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (get), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (in), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (it), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (member), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (assign), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (role), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (user), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (role), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (user), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (new), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (Create), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (internal), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (demo), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (new), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (the), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (for), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (Create), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (id), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (id), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (First), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (POOL_FLOATING_START), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (VMs), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (used), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (be), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (id), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (IPs), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (containing), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (subnet), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (Create), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (connection), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (necessary), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (that), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (via), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (the), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (in), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (present), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (locally), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (server), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (metadata), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (the), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (access), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (gain), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (VMs), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (the), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (the), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (public), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (give), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (dirty), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (bit), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (hands), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (your), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (get), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (to), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (you), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (so), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (to), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (IPs), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (floating), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (assign), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (to), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (dashboard), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (use), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (can), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (you), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (Unfortunatly), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (dev), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (addr), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (ip), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (up), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (EXT_NET_BRIDGE), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (link), this should not happen!
+
+(gedit:2599): GtkSourceView-WARNING **: Could not find word to remove in buffer (ip), this should not happen!
