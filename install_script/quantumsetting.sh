@@ -15,7 +15,7 @@ TENANT_NAME="proj1"             # The tenant this network is created for
 USER_NAME="user1"
 TENANT_NETWORK_NAME="net_proj1" # The Quantum-internal network name
 FIXED_RANGE="192.168.50.0/24"	# The IP range for the private tenant network
-NETWORK_GATEWAY="10.5.5.1"	# The Gateway Tenant-VMs will receive as default gw
+NETWORK_GATEWAY="192.168.50.1"	# The Gateway Tenant-VMs will receive as default gw
 
 ##############################################################
 ### Public Network ###########################################
