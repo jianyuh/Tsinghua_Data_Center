@@ -25,3 +25,8 @@ find . -name "*hello*"
 cat aaa | xargs -i{} echo {} | xargs -i{} quantum router-delete {}
 
 quantum router-list -F id -f csv | sed 's/["\n]//g' | xargs -i{} quantum router-delete {}
+
+useradd -m xiangyong -s /bin/bash
+usermod -aG sudo xiangyong
+
+gpasswd -d xiangyong sudo
