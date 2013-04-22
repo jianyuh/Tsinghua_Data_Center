@@ -30,3 +30,8 @@ useradd -m xiangyong -s /bin/bash
 usermod -aG sudo xiangyong
 
 gpasswd -d xiangyong sudo
+
+#find the content from all the file under a directory
+grep "192.168.10.51" -rl /etc
+
+
