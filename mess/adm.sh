@@ -34,4 +34,5 @@ gpasswd -d xiangyong sudo
 #find the content from all the file under a directory
 grep "192.168.10.51" -rl /etc
 
-
+#look up the port used by which program
+netstat -tulpn | grep :8000
