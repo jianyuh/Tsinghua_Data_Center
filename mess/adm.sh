@@ -36,3 +36,6 @@ grep "192.168.10.51" -rl /etc
 
 #look up the port used by which program
 netstat -tulpn | grep :8000
+
+#copy the file with the same contenet covered and the permission reserved
+\cp -r --preserve=all computenode2 newnfsroot_origin3
