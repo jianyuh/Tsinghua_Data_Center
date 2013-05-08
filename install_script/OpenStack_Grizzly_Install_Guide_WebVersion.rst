@@ -1,5 +1,5 @@
 ==========================================================
-  OpenStack Grizzly Install Guide
+  OpenStack Grizzly Install Guide(3 NICs, vlan)
 ==========================================================
 
 :Version: 3.0
