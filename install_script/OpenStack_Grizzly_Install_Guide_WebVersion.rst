@@ -203,7 +203,7 @@ Status: stable
    apt-get install curl openssl
    curl http://192.168.100.51:35357/v2.0/endpoints -H 'x-auth-token: ADMIN'
 
-Or we can use a simple CLI command::
+* Or we can use a simple CLI command::
    keystone user-list
 
 
@@ -949,7 +949,7 @@ You can now access your OpenStack **192.168.100.51/horizon** with credentials **
 
 To start your first VM, we first need to create a new tenant, user, internal and external network. SSH to your controller node and perform the following.
 
-(If you would like to have a try without wasting so much time at input the following command, you can change the parameter of my script `Quantum Setting Script<https://raw.github.com/huangjy911/Tsinghua_Data_Center/master/install_script/quantumsetting.sh>`_ of this git repository::
+(If you would like to have a try without wasting so much time at input the following command, you can change the parameter of `Quantum Setting Script <https://raw.github.com/huangjy911/Tsinghua_Data_Center/master/install_script/quantumsetting.sh>`_ ::
 
 #Modify THE variables before executing the scripts
 )
@@ -990,6 +990,9 @@ To start your first VM, we first need to create a new tenant, user, internal and
 * Set the router for the external network::
 
    quantum router-gateway-set $put_router_proj_one_id_here $put_id_of_ext_net_here
+
+
+(The above `Quantum Setting Script <https://raw.github.com/huangjy911/Tsinghua_Data_Center/master/install_script/quantumsetting.sh>`_ excuted the CLI command by here)
 
 VMs gain access to the metadata server locally present in the controller node via the external network. To create that necessary connection perform the following:
 
