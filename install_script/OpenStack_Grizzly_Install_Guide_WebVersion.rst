@@ -22,7 +22,7 @@ Contributors
 
  Houssem Medhioub <houssem.medhioub@it-sudparis.eu> Djamal Zeghlache <djamal.zeghlache@telecom-sudparis.eu>
 
- Jianyu Huang <jianyu.huang@utexas.edu>
+ Jianyu Huang <hjyahead@gmail.com>
 =================================================== =======================================================
 
 Wana contribute ? Read the guide, send your contribution and get your name listed ;)
