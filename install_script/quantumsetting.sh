@@ -75,7 +75,7 @@ create_net() {
     local tenant_id=$(keystone tenant-list | grep " $tenant_name " | awk '{print $2}')
 
     tenant_net_id=$(get_id quantum net-create --tenant_id $tenant_id $tenant_network_name --provider:network_type vlan --provider:physical_network physnet1 --provider:segmentation_id 1024)
-    tenant_subnet_id=$(get_id quantum subnet-create --tenant_id $tenant_id $tenant_network_name $fixed_range)
+    tenant_subnet_id=$(get_id quantum subnet-create --tenant_id $tenant_id $tenant_network_name $fixed_range --dns_nameservers list=true 166.111.8.28 8.8.8.8)
     prov_router_id=$(get_id quantum router-create --tenant_id $tenant_id $prov_router_name)
 
     quantum router-interface-add $prov_router_id $tenant_subnet_id
