@@ -1048,7 +1048,7 @@ This work has been supported by:
 
 This work has been based on:
 
-* Emilien Macchi's Folsom guide [https://github.com/EmilienM/openstack-grizzly-guide]
+* Emilien Macchi's Folsom guide [https://github.com/EmilienM/openstack-folsom-guide]
 * OpenStack Documentation [http://docs.openstack.org/trunk/openstack-compute/install/apt/content/]
 * OpenStack Quantum Install [http://docs.openstack.org/trunk/openstack-network/admin/content/ch_install.html]
 
