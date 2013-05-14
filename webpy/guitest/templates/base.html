@@ -1,0 +1,23 @@
+$def with (page)
+
+$#had better be consistent with the style of the original horizon
+
+<html>
+	<head> <title>GUI</title>
+		<style>
+			#menu {
+				width: 200px;
+				float: right;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="menu">
+			<li><a href="/">Home</a></li>
+			$#<li><a href="/new">New IP</a></li>
+		</ul>
+
+		$:page
+
+	</body>
+</html>
