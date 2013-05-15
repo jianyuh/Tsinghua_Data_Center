@@ -24,6 +24,8 @@ $def with (hostposts, imageposts, form)
 	</tr>
 </table>
 
+<h1>Host Image Mapping</h1>
+
 <form action="" method="post">
 	$:form.render()
 </form>
