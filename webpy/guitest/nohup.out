@@ -828,3 +828,51 @@ Traceback (most recent call last):
   File "/usr/local/lib/python2.7/dist-packages/gevent/baseserver.py", line 206, in _tcp_listener
     sock.bind(address)
 socket.error: [Errno 98] Address already in use: ('0.0.0.0', 8086)
+Warning: Listen on 127.0.0.1:8086 failed, listen on 0.0.0.0:8086 instead.
+Traceback (most recent call last):
+  File "/home/huang/Desktop/wallproxy-wallproxy-46de72a/local/startup.py", line 8, in <module>
+    main()
+  File "<string>", line 1597, in _37
+  File "<string>", line 1577, in _______
+  File "<string>", line 1509, in _50
+  File "<string>", line 1503, in _85
+  File "<string>", line 1482, in _100
+  File "<string>", line 1348, in _82
+  File "<string>", line 1303, in __init__
+  File "/usr/local/lib/python2.7/dist-packages/gevent/server.py", line 90, in pre_start
+    BaseServer.pre_start(self)
+  File "/usr/local/lib/python2.7/dist-packages/gevent/baseserver.py", line 136, in pre_start
+    self.socket = _tcp_listener(self.address, backlog=self.backlog, reuse_addr=self.reuse_addr)
+  File "/usr/local/lib/python2.7/dist-packages/gevent/baseserver.py", line 206, in _tcp_listener
+    sock.bind(address)
+socket.error: [Errno 98] Address already in use: ('0.0.0.0', 8086)
+Warning: Listen on 127.0.0.1:8086 failed, listen on 0.0.0.0:8086 instead.
+Traceback (most recent call last):
+  File "/home/huang/Desktop/wallproxy-wallproxy-46de72a/local/startup.py", line 8, in <module>
+    main()
+  File "<string>", line 1597, in _37
+  File "<string>", line 1577, in _______
+  File "<string>", line 1509, in _50
+  File "<string>", line 1503, in _85
+  File "<string>", line 1482, in _100
+  File "<string>", line 1348, in _82
+  File "<string>", line 1303, in __init__
+  File "/usr/local/lib/python2.7/dist-packages/gevent/server.py", line 90, in pre_start
+    BaseServer.pre_start(self)
+  File "/usr/local/lib/python2.7/dist-packages/gevent/baseserver.py", line 136, in pre_start
+    self.socket = _tcp_listener(self.address, backlog=self.backlog, reuse_addr=self.reuse_addr)
+  File "/usr/local/lib/python2.7/dist-packages/gevent/baseserver.py", line 206, in _tcp_listener
+    sock.bind(address)
+socket.error: [Errno 98] Address already in use: ('0.0.0.0', 8086)
+0.0 (1): SELECT * FROM nodeinfo ORDER BY id DESC
+0.0 (2): SELECT * FROM imageinfo ORDER BY id DESC
+0.0 (1): SELECT * FROM nodeinfo ORDER BY id DESC
+0.0 (2): SELECT * FROM imageinfo ORDER BY id DESC
+0.0 (3): SELECT * FROM nodeinfo ORDER BY id DESC
+0.0 (4): SELECT * FROM imageinfo ORDER BY id DESC
+10.222.0.100:53231 - - [16/May/2013 16:11:50] "HTTP/1.1 GET /" - 200 OK
+10.222.0.100:53231 - - [16/May/2013 16:11:51] "HTTP/1.1 GET /favicon.ico" - 404 Not Found
+0.0 (1): SELECT * FROM nodeinfo ORDER BY id DESC
+0.0 (2): SELECT * FROM imageinfo ORDER BY id DESC
+10.222.0.100:53250 - - [16/May/2013 16:12:10] "HTTP/1.1 GET /" - 200 OK
+10.222.0.100:53250 - - [16/May/2013 16:12:10] "HTTP/1.1 GET /favicon.ico" - 404 Not Found

@@ -3,6 +3,7 @@ import model
 import os
 import sys
 import logging
+import re
 
 
 logger=logging.getLogger('shell')
@@ -24,7 +25,8 @@ urls = (
     '/newimage','Newimage',
     '/deleteimage/(\d+)','Delimage',
     '/editimage/(\d+)','Editimage',
-#    '/reboot','Reboot',
+    '/reboot/(\d+)','Reboot',
+    '/migration/(\d+)','Migration',
 )
 
 #render = web.template.render('templates', base='base')
@@ -50,23 +52,30 @@ class Index:
         web.form.Dropdown(name='host', args=hostlist),
         web.form.Dropdown(name='image', args=imagelist),
         web.form.Button('Set'),
-        web.form.Button('Migration'),
-        web.form.Button('Reboot&&Change OS'),
+        #web.form.Button('Migration'),
+        #web.form.Button('Reboot&&Change OS'),
     ) 
+
+#    form2 = web.form.Form(
+#        web.form.Dropdown(name='host', args=hostlist),
+#        web.form.Button('Migration'),
+#    ) 
 
     def GET(self):
         hostposts = model.gethost_posts()
         imageposts = model.getimage_posts()
 
         form = self.form()
+        #form2 = self.form2()
         #form = web.form.Form()
         return render.index(hostposts, imageposts, form)
 
     def POST(self):
-        hostposts = model.gethost_posts()
-        imageposts = model.getimage_posts()
+	hostposts = model.gethost_posts()
+	imageposts = model.getimage_posts()
 
         form = self.form()
+        #form2 = self.form()
  
         if not form.validates():
             return render.index(hostposts, imageposts, form)
@@ -206,10 +215,50 @@ class Editimage:
         raise web.seeother('/')
 
 
-#class Reboot:
-#    def POST(self,id):
-#
-#        raise web.seeother('/')
+class Reboot:
+    def GET(self,id):
+        post = model.gethost_post(int(id))
+        #os.shell
+        cmd = "expect -f et3.sh "+post.ipaddr
+        logger.info(cmd)
+        print os.popen(cmd).read().strip()
+        raise web.seeother('/')
+
+class Migration:
+    def GET(self,id):
+        post = model.gethost_post(int(id))
+        #os.shell
+
+        if post.hostname=="compute":
+            fromhost="compute"
+            tohost="compute2"
+        else:
+            fromhost="compute2"
+            tohost="compute"
+
+        cmd="nova list --all-tenants | awk {'print $2'}"
+        str=os.popen(cmd).read().strip()
+        instanceIDgroup=re.split('\n',str)
+
+        migrationInstaceGroup=[]
+
+        for instanceID in instanceIDgroup:
+            if instanceID=="":
+                continue
+            if instanceID=="ID":
+                continue
+            cmd="nova show "+instanceID+"|grep OS-EXT-SRV-ATTR:host| awk {'print $4'}"
+            if os.popen(cmd).read().strip()==fromhost:
+                migrationInstaceGroup.append(instanceID)
+
+
+        for instanceID in migrationInstaceGroup:
+            cmd="nova live-migration "+instanceID+" "+tohost
+            print "migration result:",os.popen(cmd).read().strip()
+
+        print "finished"
+        raise web.seeother('/')
+
 
 app = web.application(urls, globals())
 

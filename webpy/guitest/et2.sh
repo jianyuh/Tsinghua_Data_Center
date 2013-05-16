@@ -1,10 +1,9 @@
 #!/usr/bin/expect
 set timeout 10
 
-set hostmac [lindex $argv 0]
-set imagelocation [lindex $argv 1]
+set hostip [lindex $argv 0]
 
-spawn /usr/bin/ssh iiis@10.10.0.50
+spawn /usr/bin/ssh iiisclient@$hostip
 expect {
 "password:" {
 send "siii\r"
@@ -20,7 +19,7 @@ send "sudo -s\r"
 expect "*password*" 
 send "siii\r"
 expect "# " 
-send "bash mapHostImage.sh $hostmac $imagelocation\r"
+send "reboot\r"
 
 #interact
 

@@ -4,7 +4,7 @@ set timeout 10
 set hostmac [lindex $argv 0]
 set imagelocation [lindex $argv 1]
 
-spawn /usr/bin/ssh iiis@10.10.0.50
+spawn /usr/bin/ssh iiis@166.111.129.19
 expect {
 "password:" {
 send "siii\r"

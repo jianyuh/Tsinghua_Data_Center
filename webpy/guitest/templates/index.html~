@@ -9,6 +9,8 @@ $def with (hostposts, imageposts, form)
 	<tr>
 		<td>$post.id</td><td><a href="/viewhost/$post.id">$post.hostname</a></td><td>$post.macaddr</td><td>$post.ipaddr</td>
 		<td><a href="/edithost/$post.id">Edit</a></td>
+		<td><a href="/reboot/$post.id">Reboot</a></td>
+		<td><a href="/migration/$post.id">Migration</a></td>
 	</tr>
 </table>
 
@@ -29,4 +31,8 @@ $def with (hostposts, imageposts, form)
 <form action="" method="post">
 	$:form.render()
 </form>
+
+<h1>Reboot&&Change OS of Physical Node</h1>
+
+
 
