@@ -1,0 +1,12 @@
+$def with (post, form)
+
+<h1>Edit $form.d.hostname</h1>
+
+<form action="" method="post">
+	$:form.render()
+</form>
+
+<h2>Delete Host Record</h2>
+<form action="/deletehost/$post.id" method="post">
+	<input type="submit" value="Delete host Record"/>
+</form>

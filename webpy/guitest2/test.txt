@@ -1,0 +1,5 @@
+PROMPT 0
+DEFAULT linux
+LABEL linux
+  KERNEL vmlinuz-3.5.0-27-generic
+  APPEND root=/dev/nfs initrd=initrd.img-3.5.0-27-generic nfsroot=10.10.0.50    :/test/ ip=:::::eth0:dhcp rw
