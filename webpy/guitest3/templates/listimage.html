@@ -1,0 +1,16 @@
+$def with (imageposts)
+
+<h1>Image information list</h1>
+
+
+<table border="1px" bordercolor="#000000" style="border-collapse:collapse">
+$#<table>
+	<tr>
+		<td>ID</td><td>imagename</td><td>imagelocation</td><td>kernel</td><td>initrd</td><td><a href ="newimage">New</a></td>
+	$for post in imageposts:
+	<tr>
+		<td>$post.id</td><td><a href="/viewimage/$post.id">$post.imagename</a></td><td>$post.imagelocation</td><td>$post.kernel</td><td>$post.initrd</td>
+		<td><a href="/editimage/$post.id">Edit</a></td>
+	</tr>
+</table>
+

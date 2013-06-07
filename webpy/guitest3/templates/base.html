@@ -1,0 +1,30 @@
+$def with (page)
+
+$#had better be consistent with the style of the original horizon
+
+<html>
+	<head> <title>GUI</title>
+		<style>
+			#menu {
+				width: 200px;
+				float: right;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="menu">
+			<li><a href="http://10.10.0.200:8000/project/">Home</a></li>
+			$#<li><a href="/new">New IP</a></li>
+                        <li><a href="/listhost">Physical Node Information</a></li>
+                        <li><a href="/listimage">Image Information</a></li>
+                        <li><a href="/pxesetting">PXE boot Setting</a></li>
+                        <li><a href="/openstacksetting">OpenStack Setting</a></li>
+                        <li><a href="/hybridschedule">Hybrid Schedule</a></li>
+                        <li><a href="http://10.10.0.200:8000">Management Horizon</a></li>
+                        <li><a href="http://10.10.0.200:8080">Index</a></li>
+		</ul>
+
+		$:page
+
+	</body>
+</html>

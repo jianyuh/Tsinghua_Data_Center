@@ -1,0 +1,9 @@
+$def with ()
+
+<h1><a href="/controllerinstall">Deploy Controller Node</a></h1>
+
+<h1><a href="/networkinstall">Deploy Network Node</a></h1>
+
+<h1><a href="/computeinstall">Deploy Compute Node</a></h1>
+
+<h1><a href="/networksetting">Configure the network></a></h1>

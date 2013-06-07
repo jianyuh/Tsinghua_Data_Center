@@ -1,0 +1,22 @@
+$def with (hostposts)
+<h1>Hybrid Schedule (Physical Node & VM)</h1>
+
+<p><b><i>Please finish the <a href='/pxesetting'>PXE setting</a> first to get a customized OS for a specific machine.</b></i></p>
+
+$#<table border="1px" bordercolor="#000000" cellspacing="0px" style="border-collapse:collapse">
+<table border="1px" bordercolor="#000000" style="border-collapse:collapse">
+$#<table border="1">
+	<tr>
+		$#<td>ID</td><td>hostname</td><td>macaddr</td><td>ipaddr</td><td><a href="/newhost">New</a></td>
+		<td>Hostname</td><td>IP Address</td>
+	$for post in hostposts:
+	<tr>
+		<td><a href="/viewhost/$post.id">$post.hostname</a></td><td>$post.ipaddr</td>
+		$#<td>$post.id</td><td><a href="/viewhost/$post.id">$post.hostname</a></td><td>$post.macaddr</td><td>$post.ipaddr</td>
+		$#<td><a href="/edithost/$post.id">Edit</a></td>
+		<td><a href="/migration/$post.id">Migration</a></td>
+		<td><a href="/reboot/$post.id">Reboot</a></td>
+	</tr>
+</table>
+
+

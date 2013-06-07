@@ -1,0 +1,16 @@
+$def with (hostposts)
+<h1>Node information list</h1>
+
+<table>
+	<tr>
+		<td>ID</td><td>hostname</td><td>macaddr</td><td>ipaddr</td><td><a href="/newhost">New</a></td>
+	$for post in hostposts:
+	<tr>
+		<td>$post.id</td><td><a href="/viewhost/$post.id">$post.hostname</a></td><td>$post.macaddr</td><td>$post.ipaddr</td>
+		<td><a href="/edithost/$post.id">Edit</a></td>
+		<td><a href="/migration/$post.id">Migration</a></td>
+		<td><a href="/reboot/$post.id">Reboot</a></td>
+	</tr>
+</table>
+
+
