@@ -32,6 +32,9 @@ urls = (
     '/migration/(\d+)','Migration',
     '/openstacksetting','OpenStackSetting',
     '/computeinstall','ComputeInstall',
+    '/controllerinstall','ControllerInstall',
+    '/networkinstall','NetworkInstall',
+    '/networksetting','NetworkSetting',
     '/hybridschedule','HybridSchedule',
 )
 
@@ -39,11 +42,18 @@ render = web.template.render('templates', base='base')
 #render = web.template.render('templates')
 
 vdnsserver = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
-vcompute_mnt_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
-vcompute_vm_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
 vcontroller_mnt_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
+vnetwork_mnt_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
+vcompute_mnt_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
+vcontroller_vm_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
+vnetwork_vm_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
+vcompute_vm_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
+vcontroller_mnt_eth = web.form.regexp(r"^eth[0-9]+$","must be a eth dev name")
+vnetwork_mnt_eth = web.form.regexp(r"^eth[0-9]+$","must be a eth dev name")
 vcompute_mnt_eth = web.form.regexp(r"^eth[0-9]+$","must be a eth dev name")
 vcompute_vm_eth = web.form.regexp(r"^eth[0-9]+$","must be a eth dev name")
+vcontroller_vm_eth = web.form.regexp(r"^eth[0-9]+$","must be a eth dev name")
+vnetwork_vm_eth = web.form.regexp(r"^eth[0-9]+$","must be a eth dev name")
 
 
 class Index:   
@@ -61,6 +71,145 @@ class HybridSchedule:
         return render.hybridschedule(hostposts)
 
 
+class ControllerInstall:
+    form = web.form.Form(
+        web.form.Textbox('dnsserver',vdnsserver,
+                         size=30,
+                         description="DNS Server:"),
+        web.form.Textbox('compute_mnt_eth',vcompute_mnt_eth,
+                         size=30,
+                         description="Controller Node Management eth:"),
+        web.form.Textbox('compute_mnt_ip',vcompute_mnt_ip,
+                         size=30,
+                         description="Controller Node Management IP:"),
+        web.form.Textbox('compute_mnt_eth',vcompute_mnt_eth,
+                         size=30,
+                         description="Controller Node VM Communication eth:"),
+        web.form.Textbox('compute_vm_ip',vcompute_vm_ip,
+                         size=30,
+                         description="Controller Node VM Communication IP:"),
+
+        #hostposts = model.gethost_posts()
+        #web.form.Dropdown(name='foo', args=['a','b','c'], value='b'),
+        web.form.Button('Configure Controller Node'),
+    ) 
+
+    def GET(self):
+        #print "new part"
+        form = self.form()
+        return render.controllerinstall(form)
+
+    def POST(self):
+        form = self.form()
+        if not form.validates():
+            return render.controllerinstall(form) 
+        print "validated, but not posted"
+        #model.newimage_post(form.d.imagename, form.d.imagelocation)
+        print "SH action!"
+
+        #os.shell
+        cmd = "sh controllerinstall.sh "+form.d.dnsserver+" "+form.d.controller_mnt_eth+" "+form.d.controller_mnt_ip+" "+form.d.controller_vm_eth+" "+form.d.controller_vm_ip
+        
+        logger.info(cmd)
+        print os.popen(cmd).read().strip()
+        
+        raise web.seeother('/openstacksetting')
+
+class NetworkInstall:
+    form = web.form.Form(
+        web.form.Textbox('dnsserver',vdnsserver,
+                         size=30,
+                         description="DNS Server:"),
+        web.form.Textbox('network_mnt_eth',vnetwork_mnt_eth,
+                         size=30,
+                         description="Network Node Management eth:"),
+        web.form.Textbox('network_mnt_ip',vnetwork_mnt_ip,
+                         size=30,
+                         description="Network Node Management IP:"),
+        web.form.Textbox('network_mnt_eth',vnetwork_mnt_eth,
+                         size=30,
+                         description="Network Node VM Communication eth:"),
+        web.form.Textbox('network_vm_ip',vnetwork_vm_ip,
+                         size=30,
+                         description="Network Node VM Communication IP:"),
+        web.form.Textbox('controller_mnt_ip',vcontroller_mnt_ip,
+                         size=30,
+                         description="Controller Node Management IP:"),
+
+        #hostposts = model.gethost_posts()
+        #web.form.Dropdown(name='foo', args=['a','b','c'], value='b'),
+        web.form.Button('Configure Network Node'),
+    ) 
+
+    def GET(self):
+        #print "new part"
+        form = self.form()
+        return render.networkinstall(form)
+
+    def POST(self):
+        form = self.form()
+        if not form.validates():
+            return render.networkinstall(form) 
+        print "validated, but not posted"
+        #model.newimage_post(form.d.imagename, form.d.imagelocation)
+        print "SH action!"
+
+        #os.shell
+        cmd = "sh networkinstall.sh "+form.d.dnsserver+" "+form.d.network_mnt_eth+" "+form.d.network_mnt_ip+" "+form.d.network_vm_eth+" "+form.d.network_vm_ip+" "+form.d.controller_mnt_ip
+        
+        logger.info(cmd)
+        print os.popen(cmd).read().strip()
+        
+        raise web.seeother('/openstacksetting')
+
+class NetworkSetting:
+    form = web.form.Form(
+        web.form.Textbox('dnsserver',vdnsserver,
+                         size=30,
+                         description="DNS Server:"),
+        web.form.Textbox('network_mnt_eth',vnetwork_mnt_eth,
+                         size=30,
+                         description="Network Node Management eth:"),
+        web.form.Textbox('network_mnt_ip',vnetwork_mnt_ip,
+                         size=30,
+                         description="Network Node Management IP:"),
+        web.form.Textbox('network_mnt_eth',vnetwork_mnt_eth,
+                         size=30,
+                         description="Network Node VM Communication eth:"),
+        web.form.Textbox('network_vm_ip',vnetwork_vm_ip,
+                         size=30,
+                         description="Network Node VM Communication IP:"),
+        web.form.Textbox('controller_mnt_ip',vcontroller_mnt_ip,
+                         size=30,
+                         description="Controller Node Management IP:"),
+
+        #hostposts = model.gethost_posts()
+        #web.form.Dropdown(name='foo', args=['a','b','c'], value='b'),
+        web.form.Button('Configure Network Node'),
+    ) 
+
+    def GET(self):
+        #print "new part"
+        form = self.form()
+        return render.networksetting(form)
+
+    def POST(self):
+        form = self.form()
+        if not form.validates():
+            return render.networksetting(form) 
+        print "validated, but not posted"
+        #model.newimage_post(form.d.imagename, form.d.imagelocation)
+        print "SH action!"
+
+        #os.shell
+        cmd = "sh networksetting.sh "+form.d.dnsserver+" "+form.d.network_mnt_eth+" "+form.d.network_mnt_ip+" "+form.d.network_vm_eth+" "+form.d.network_vm_ip+" "+form.d.controller_mnt_ip
+        
+        logger.info(cmd)
+        print os.popen(cmd).read().strip()
+        
+        raise web.seeother('/openstacksetting')
+
+
 
 class ComputeInstall:
     form = web.form.Form(
@@ -73,7 +222,7 @@ class ComputeInstall:
         web.form.Textbox('compute_mnt_ip',vcompute_mnt_ip,
                          size=30,
                          description="Compute Node Management IP:"),
-        web.form.Textbox('compute_mnt_ip',vcompute_mnt_ip,
+        web.form.Textbox('compute_mnt_eth',vcompute_mnt_eth,
                          size=30,
                          description="Compute Node VM Communication eth:"),
         web.form.Textbox('compute_vm_ip',vcompute_vm_ip,

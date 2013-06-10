@@ -32,17 +32,28 @@ urls = (
     '/migration/(\d+)','Migration',
     '/openstacksetting','OpenStackSetting',
     '/computeinstall','ComputeInstall',
+    '/controllerinstall','ControllerInstall',
+    '/networkinstall','NetworkIntall',
+    '/networksetting','NetworkSetting',
+    '/hybridschedule','HybridSchedule',
 )
 
 render = web.template.render('templates', base='base')
 #render = web.template.render('templates')
 
 vdnsserver = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
-vcompute_mnt_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
-vcompute_vm_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
 vcontroller_mnt_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
+vnetwork_mnt_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
+vcompute_mnt_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
+vcontroller_vm_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
+vnetwork_vm_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
+vcompute_vm_ip = web.form.regexp(r"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$","must be an IP address")
+vcontroller_mnt_eth = web.form.regexp(r"^eth[0-9]+$","must be a eth dev name")
+vnetwork_mnt_eth = web.form.regexp(r"^eth[0-9]+$","must be a eth dev name")
 vcompute_mnt_eth = web.form.regexp(r"^eth[0-9]+$","must be a eth dev name")
 vcompute_vm_eth = web.form.regexp(r"^eth[0-9]+$","must be a eth dev name")
+vcontroller_vm_eth = web.form.regexp(r"^eth[0-9]+$","must be a eth dev name")
+vnetwork_vm_eth = web.form.regexp(r"^eth[0-9]+$","must be a eth dev name")
 
 
 class Index:   
@@ -54,6 +65,149 @@ class OpenStackSetting:
     def GET(self):
         return render.openstacksetting()
 
+class HybridSchedule:
+    def GET(self):
+        hostposts = model.gethost_posts()
+        return render.hybridschedule(hostposts)
+
+
+class ControllerInstall:
+    form = web.form.Form(
+        web.form.Textbox('dnsserver',vdnsserver,
+                         size=30,
+                         description="DNS Server:"),
+        web.form.Textbox('compute_mnt_eth',vcompute_mnt_eth,
+                         size=30,
+                         description="Controller Node Management eth:"),
+        web.form.Textbox('compute_mnt_ip',vcompute_mnt_ip,
+                         size=30,
+                         description="Controller Node Management IP:"),
+        web.form.Textbox('compute_mnt_eth',vcompute_mnt_eth,
+                         size=30,
+                         description="Controller Node VM Communication eth:"),
+        web.form.Textbox('compute_vm_ip',vcompute_vm_ip,
+                         size=30,
+                         description="Controller Node VM Communication IP:"),
+
+        #hostposts = model.gethost_posts()
+        #web.form.Dropdown(name='foo', args=['a','b','c'], value='b'),
+        web.form.Button('Configure Controller Node'),
+    ) 
+
+    def GET(self):
+        #print "new part"
+        form = self.form()
+        return render.controllerinstall(form)
+
+    def POST(self):
+        form = self.form()
+        if not form.validates():
+            return render.controllerinstall(form) 
+        print "validated, but not posted"
+        #model.newimage_post(form.d.imagename, form.d.imagelocation)
+        print "SH action!"
+
+        #os.shell
+        cmd = "sh controllerinstall.sh "+form.d.dnsserver+" "+form.d.controller_mnt_eth+" "+form.d.controller_mnt_ip+" "+form.d.controller_vm_eth+" "+form.d.controller_vm_ip
+        
+        logger.info(cmd)
+        print os.popen(cmd).read().strip()
+        
+        raise web.seeother('/openstacksetting')
+
+class NetworkInstall:
+    form = web.form.Form(
+        web.form.Textbox('dnsserver',vdnsserver,
+                         size=30,
+                         description="DNS Server:"),
+        web.form.Textbox('network_mnt_eth',vnetwork_mnt_eth,
+                         size=30,
+                         description="Network Node Management eth:"),
+        web.form.Textbox('network_mnt_ip',vnetwork_mnt_ip,
+                         size=30,
+                         description="Network Node Management IP:"),
+        web.form.Textbox('network_mnt_eth',vnetwork_mnt_eth,
+                         size=30,
+                         description="Network Node VM Communication eth:"),
+        web.form.Textbox('network_vm_ip',vnetwork_vm_ip,
+                         size=30,
+                         description="Network Node VM Communication IP:"),
+        web.form.Textbox('controller_mnt_ip',vcontroller_mnt_ip,
+                         size=30,
+                         description="Controller Node Management IP:"),
+
+        #hostposts = model.gethost_posts()
+        #web.form.Dropdown(name='foo', args=['a','b','c'], value='b'),
+        web.form.Button('Configure Network Node'),
+    ) 
+
+    def GET(self):
+        #print "new part"
+        form = self.form()
+        return render.networkinstall(form)
+
+    def POST(self):
+        form = self.form()
+        if not form.validates():
+            return render.networkinstall(form) 
+        print "validated, but not posted"
+        #model.newimage_post(form.d.imagename, form.d.imagelocation)
+        print "SH action!"
+
+        #os.shell
+        cmd = "sh networkinstall.sh "+form.d.dnsserver+" "+form.d.network_mnt_eth+" "+form.d.network_mnt_ip+" "+form.d.network_vm_eth+" "+form.d.network_vm_ip+" "+form.d.controller_mnt_ip
+        
+        logger.info(cmd)
+        print os.popen(cmd).read().strip()
+        
+        raise web.seeother('/openstacksetting')
+
+class NetworkSetting:
+    form = web.form.Form(
+        web.form.Textbox('dnsserver',vdnsserver,
+                         size=30,
+                         description="DNS Server:"),
+        web.form.Textbox('network_mnt_eth',vnetwork_mnt_eth,
+                         size=30,
+                         description="Network Node Management eth:"),
+        web.form.Textbox('network_mnt_ip',vnetwork_mnt_ip,
+                         size=30,
+                         description="Network Node Management IP:"),
+        web.form.Textbox('network_mnt_eth',vnetwork_mnt_eth,
+                         size=30,
+                         description="Network Node VM Communication eth:"),
+        web.form.Textbox('network_vm_ip',vnetwork_vm_ip,
+                         size=30,
+                         description="Network Node VM Communication IP:"),
+        web.form.Textbox('controller_mnt_ip',vcontroller_mnt_ip,
+                         size=30,
+                         description="Controller Node Management IP:"),
+
+        #hostposts = model.gethost_posts()
+        #web.form.Dropdown(name='foo', args=['a','b','c'], value='b'),
+        web.form.Button('Configure Network Node'),
+    ) 
+
+    def GET(self):
+        #print "new part"
+        form = self.form()
+        return render.networksetting(form)
+
+    def POST(self):
+        form = self.form()
+        if not form.validates():
+            return render.networksetting(form) 
+        print "validated, but not posted"
+        #model.newimage_post(form.d.imagename, form.d.imagelocation)
+        print "SH action!"
+
+        #os.shell
+        cmd = "sh networksetting.sh "+form.d.dnsserver+" "+form.d.network_mnt_eth+" "+form.d.network_mnt_ip+" "+form.d.network_vm_eth+" "+form.d.network_vm_ip+" "+form.d.controller_mnt_ip
+        
+        logger.info(cmd)
+        print os.popen(cmd).read().strip()
+        
+        raise web.seeother('/openstacksetting')
 
 
 
@@ -68,7 +222,7 @@ class ComputeInstall:
         web.form.Textbox('compute_mnt_ip',vcompute_mnt_ip,
                          size=30,
                          description="Compute Node Management IP:"),
-        web.form.Textbox('compute_mnt_ip',vcompute_mnt_ip,
+        web.form.Textbox('compute_mnt_eth',vcompute_mnt_eth,
                          size=30,
                          description="Compute Node VM Communication eth:"),
         web.form.Textbox('compute_vm_ip',vcompute_vm_ip,
@@ -102,7 +256,7 @@ class ComputeInstall:
         logger.info(cmd)
         print os.popen(cmd).read().strip()
         
-        raise web.seeother('/')
+        raise web.seeother('/openstacksetting')
 
 
 class Listhost:
@@ -150,13 +304,13 @@ class Newhost:
             return render.newhost(form)
         print "validated, but not posted"
         model.newhost_post(form.d.hostname, form.d.macaddr, form.d.ipaddr)
-        raise web.seeother('/')
+        raise web.seeother('/listhost')
 
 
 class Delhost:
     def POST(self,id):
         model.delhost_post(int(id))
-        raise web.seeother('/')
+        raise web.seeother('/listhost')
     
 class Edithost:
     def GET(self,id):
@@ -171,7 +325,7 @@ class Edithost:
         if not form.validates():
             return render.edithost(post, form)
         model.updatehost_post(int(id), form.d.hostname, form.d.macaddr, form.d.ipaddr)
-        raise web.seeother('/')
+        raise web.seeother('/listhost')
 
 class Listimage:
     def GET(self):
@@ -186,6 +340,8 @@ class Viewimage:
 
 vimagename = web.form.regexp(r".{1,20}$",'must be between 1 and 20 characters')
 vimagelocation = web.form.regexp(r"(\/.*?)+","must be a path")
+vkernel = web.form.regexp(r".{1,100}$",'must a string')
+vinitrd = web.form.regexp(r".{1,100}$",'must a string')
 
 
 class Newimage:
@@ -196,6 +352,12 @@ class Newimage:
         web.form.Textbox('imagelocation',vimagelocation,
                           size=30,
                           description="Image Location"),
+        web.form.Textbox('kernel',vkernel,
+                          size=30,
+                          description="Image Kernel"),
+        web.form.Textbox('initrd',vinitrd,
+                          size=30,
+                          description="Image initrd"),
         web.form.Button('Edit'),
     ) 
 
@@ -209,14 +371,14 @@ class Newimage:
         if not form.validates():
             return render.newimage(form) 
         print "validated, but not posted"
-        model.newimage_post(form.d.imagename, form.d.imagelocation)
-        raise web.seeother('/')
+        model.newimage_post(form.d.imagename, form.d.imagelocation, form.d.kernel, form.d.initrd)
+        raise web.seeother('/listimage')
 
 
 class Delimage:
     def POST(self,id):
         model.delimage_post(int(id))
-        raise web.seeother('/')
+        raise web.seeother('/listimage')
     
 class Editimage:
     def GET(self,id):
@@ -230,8 +392,8 @@ class Editimage:
         post = model.getimage_post(int(id))
         if not form.validates():
             return render.editimage(post, form)
-        model.updateimage_post(int(id), form.d.imagename, form.d.imagelocation)
-        raise web.seeother('/')
+        model.updateimage_post(int(id), form.d.imagename, form.d.imagelocation, form.d.kernel, form.d.initrd)
+        raise web.seeother('/listimage')
 
 class PXESetting:
     hostposts = model.gethost_posts()
@@ -285,16 +447,26 @@ class PXESetting:
 
         hostmac = model.getmacofhost(form.d.host).macaddr
         #print hostmac
-        imagelocation = model.getimagelocation(form.d.image).imagelocation
+#        imagelocation = model.getimagelocation(form.d.image).imagelocation
+#        kernel = model.getimagelocation(form.d.image).kernel
+#        initrd = model.getimagelocation(form.d.image).initrd
+#        
+#        imageposts = model.getimage_posts()
+#        imagelocation=imagepost.imagelocation
+
+        imagepost = model.getimage_post_byname(form.d.image)
+        imagelocation=imagepost.imagelocation
+        kernel=imagepost.kernel
+        initrd=imagepost.initrd
         #print imagelocation
         #os.shell
-        cmd = "expect -f et.sh "+hostmac+" "+imagelocation
+        cmd = "expect -f et.sh "+hostmac+" "+imagelocation+" "+kernel+" "+initrd
         
         logger.info(cmd)
         print os.popen(cmd).read().strip()
         
 
-        raise web.seeother('/')
+        raise web.seeother('/pxesetting')
 
 
 
@@ -305,7 +477,7 @@ class Reboot:
         cmd = "expect -f et3.sh "+post.ipaddr
         logger.info(cmd)
         print os.popen(cmd).read().strip()
-        raise web.seeother('/')
+        raise web.seeother('/hybridschedule')
 
 class Migration:
     def GET(self,id):
@@ -340,7 +512,7 @@ class Migration:
             print "migration result:",os.popen(cmd).read().strip()
 
         print "finished"
-        raise web.seeother('/')
+        raise web.seeother('/hybridschedule')
 
 
 app = web.application(urls, globals())

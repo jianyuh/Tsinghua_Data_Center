@@ -1,0 +1,7 @@
+$def with (form)
+
+<h1>Deploy OpenStack on the Compute Node</h1>
+$#<form action="" method="POST">
+<form method="POST">
+	$:form.render()
+</form>
